@@ -1,55 +1,5 @@
 local ReusableFunctions = {}
-
-function ReusableFunctions.getPathFromString(parent, pathString)
-	local parts = pathString:split(".")  
-	local currentInstance = parent
-
-	for _, part in ipairs(parts) do
-		if currentInstance then
-
-			currentInstance = currentInstance:FindFirstChild(part)  -- Find  child with name of current part
-
-		else
-			break  
-		end
-	end
-
-	return currentInstance  
-end
-
-ReusableFunctions.suffixes = {
-	{1e21, "S"},
-	{1e18, "Qi"},
-	{1e15, "Qa"},
-	{1e12, "T"},
-	{1e9, "B"},
-	{1e6, "M"},
-	{1e3, "K"}
-}
-
-function ReusableFunctions.formatWithDecimals(value)
-	if value % 1 == 0 then
-		return string.format("%.0f", value)
-	else
-		return string.format("%.2f", value)
-	end
-end
-
-function ReusableFunctions.formatNumber(num, index)
-	if index > #ReusableFunctions.suffixes or num < 1e3 then
-		return ReusableFunctions.formatWithDecimals(num)
-	end
-
-	local magnitude, symbol = ReusableFunctions.suffixes[index][1], ReusableFunctions.suffixes[index][2]
-
-	if num >= magnitude then
-		return ReusableFunctions.formatWithDecimals(num / magnitude) .. symbol
-	else
-		return ReusableFunctions.formatNumber(num, index + 1)
-	end
-end
-
-
+--... other code
 local boostFactor = 1.5
 
 function ReusableFunctions.getRandomWeightedSelection(weights, luckMultiplier)
